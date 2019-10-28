@@ -38,7 +38,8 @@ ENV DOTNET_USE_POLLING_FILE_WATCHER=true \
     # Skip extraction of XML docs - generally not useful within an image/container - helps performance
     NUGET_XMLDOC_MODE=skip
 
-   
+RUN mkdir -p /opt/dotnet_test
+WORKDIR /opt/dotnet_test
 
 # Trigger first run experience by running arbitrary cmd
 	#Display .NET Core information.
@@ -50,7 +51,6 @@ RUN dotnet --info && \
 	#Display .NET Core SDK version in use.
 	dotnet --version && \
 	# test build
-	mkdir -p /opt/dotnet_test && cd /opt/dotnet_test && \
 	git clone https://github.com/ae2021/dotnet_core_ci_dummy.git . && \
 	dotnet build && \
 	dotnet run --project hello_world/hello_world.csproj && \
