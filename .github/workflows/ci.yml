@@ -1,0 +1,12 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+
+  build-ubuntu:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag dotnet_core_alpine:master_latest
